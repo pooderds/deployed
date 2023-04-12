@@ -1,7 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { RecipiesComponent } from './recipies/recipies.component';
+import { ShoppigListComponent } from './shoppig-list/shoppig-list.component';
+import { ShopingEditComponent } from './shoppig-list/shoping-edit/shoping-edit.component';
+import { RecipeDetailComponent } from './recipies/recipe-detail/recipe-detail.component';
+import { PleaseSelectComponent } from './recipies/recipe-start/please-select.component';
+import { RecipeEditComponent } from './recipies/recipe-edit/recipe-edit.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+  {
+    path: 'recipes', component: RecipiesComponent,
+    children: [
+
+      { path: '', component: PleaseSelectComponent },
+      { path: 'new', component: RecipeEditComponent},
+      { path: ':id', component: RecipeDetailComponent },
+      { path: ':id/edit', component: RecipeEditComponent},
+    ]
+  },
+  {
+    path: 'shopping-list', component: ShoppigListComponent, children: [
+      { path: 'shopping-edit', component: ShopingEditComponent }
+    ]
+  },
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
