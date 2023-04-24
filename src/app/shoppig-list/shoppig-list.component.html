@@ -1,11 +1,12 @@
 <div class="row">
     <div class="col-xs-10">
-       <router-outlet></router-outlet>
+       <app-shoping-edit></app-shoping-edit>
+       
         <hr>
         <ul class="list-group">
             <a class="list-group-item" style="cursor: pointer"
-            *ngFor=" let ingridient of ingredients"
-           
+            *ngFor=" let ingridient of ingredients; let i = index"
+           (click)="onEditItem(i)"
             >
                 {{ingridient.name}} ({{ ingridient.amount}})
              </a>
