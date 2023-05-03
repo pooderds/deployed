@@ -7,6 +7,7 @@ import { ShopingEditComponent } from './shoppig-list/shoping-edit/shoping-edit.c
 import { RecipeDetailComponent } from './recipies/recipe-detail/recipe-detail.component';
 import { PleaseSelectComponent } from './recipies/recipe-start/please-select.component';
 import { RecipeEditComponent } from './recipies/recipe-edit/recipe-edit.component';
+import { RecipesResolverService } from './recipies/recipes-resolver.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -16,8 +17,8 @@ const routes: Routes = [
 
       { path: '', component: PleaseSelectComponent },
       { path: 'new', component: RecipeEditComponent},
-      { path: ':id', component: RecipeDetailComponent },
-      { path: ':id/edit', component: RecipeEditComponent},
+      { path: ':id', component: RecipeDetailComponent, resolve: [RecipesResolverService] },
+      { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipesResolverService]},
     ]
   },
   {
