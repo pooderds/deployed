@@ -8,11 +8,14 @@ import { RecipeDetailComponent } from './recipies/recipe-detail/recipe-detail.co
 import { PleaseSelectComponent } from './recipies/recipe-start/please-select.component';
 import { RecipeEditComponent } from './recipies/recipe-edit/recipe-edit.component';
 import { RecipesResolverService } from './recipies/recipes-resolver.service';
+import { AuthComponent } from './auth/auth/auth.component';
+import { AuthGard } from './auth/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   {
     path: 'recipes', component: RecipiesComponent,
+    canActivate: [AuthGard],
     children: [
 
       { path: '', component: PleaseSelectComponent },
@@ -26,6 +29,7 @@ const routes: Routes = [
       { path: 'shopping-edit', component: ShopingEditComponent }
     ]
   },
+  { path: 'auth', component: AuthComponent}
 
 ];
 
