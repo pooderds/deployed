@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./shoping-edit.component.css']
 })
 export class ShopingEditComponent implements OnInit, OnDestroy {
-  // @ViewChild('amountInput', {static: true}) amountInput: ElementRef;
   @ViewChild('f', { static: false }) slForm: NgForm;
 
   subscription: Subscription;
@@ -36,12 +35,6 @@ export class ShopingEditComponent implements OnInit, OnDestroy {
       );
   }
 
-  // onAddItem(nameInput: HTMLInputElement) {
-  //   this.ingridientAdded.emit({
-  //     name: nameInput.value,
-  //     amount: this.amountInput.nativeElement.value
-  //   })
-  // }
 
   onSubmit(form: NgForm) {
     const value = form.value;

@@ -12,6 +12,7 @@
                     type="button"
                      class="btn btn-danger"
                      (click)="onCancel()"
+                     style="margin-left: 10px"
                      >Cancel</button>
                 </div>
             </div>
@@ -35,7 +36,7 @@
                         type="text" 
                         id="imagePath" 
                         class="form-control"
-                        formGroupName="imagePath"
+                        formControlName="imagePath"
                         #imagePath>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                         id="description" 
                         class="form-control" 
                         rows="6"
-                        formGroupName="description">
+                        formControlName="description">
                         </textarea>
                     </div>
                 </div>
