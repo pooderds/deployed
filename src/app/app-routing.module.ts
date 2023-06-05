@@ -20,6 +20,14 @@ const routes: Routes = [
     loadChildren: ()=> 
     import('./auth/auth/auth.module')
     .then((m)=> m.AuthModule)
+  }, 
+  {
+    path: 'welcome',
+    loadComponent: ()=> import('./welcome/welcome.component')
+    .then( m => m.WelcomeComponent)
+  },
+  {
+    path: '**', redirectTo: '/recipes'
   }
 ];
 
