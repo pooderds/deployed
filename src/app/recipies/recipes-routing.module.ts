@@ -7,8 +7,10 @@ import { RecipeEditComponent } from "./recipe-edit/recipe-edit.component";
 import { PleaseSelectComponent } from "./recipe-start/please-select.component";
 import { RecipesResolverService } from "./recipes-resolver.service";
 import { RecipiesComponent } from "./recipies.component";
+import { UnsavedGuard } from "./changes-saved.guard";
 
 const routes: Routes = [
+ 
     {
         path: '', component: RecipiesComponent,
         canActivate: [AuthGard],
@@ -17,9 +19,13 @@ const routes: Routes = [
           { path: '', component: PleaseSelectComponent },
           { path: 'new', component: RecipeEditComponent},
           { path: ':id', component: RecipeDetailComponent, resolve: {recipes: RecipesResolverService} },
-          { path: ':id/edit', component: RecipeEditComponent, resolve: {recipes: RecipesResolverService}},
+          { path: ':id/edit', component: RecipeEditComponent,
+           resolve: {recipes: RecipesResolverService},
+           canDeactivate: [UnsavedGuard]},
         ]
       },
+   
+    
 ];
 
 @NgModule({

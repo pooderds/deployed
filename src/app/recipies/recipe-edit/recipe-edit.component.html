@@ -7,6 +7,7 @@
                     type="submit" 
                     class="btn btn-success"
                     [disabled]="!recipeForm.valid"
+                    
                     >Save</button>
                     <button 
                     type="button"
@@ -92,7 +93,8 @@
                             <button
                             type="button" 
                             class="btn btn-success" 
-                            (click)="onAddIngredient()">Add Ingredient</button>
+                            (click)="onAddIngredient()"
+                            style="margin-bottom: 20px;">Add Ingredient</button>
                         </div>
                     </div>
                 </div>

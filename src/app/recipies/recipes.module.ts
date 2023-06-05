@@ -10,6 +10,7 @@ import { PleaseSelectComponent } from './recipe-start/please-select.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { UnsavedGuard } from './changes-saved.guard';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     RecipesRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [UnsavedGuard]
 })
 export class RecipesModule {}
