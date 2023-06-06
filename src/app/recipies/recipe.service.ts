@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingridient.model';
 import { ShoppingListService } from '../shoppig-list/shopping-list.service';
-import { Subject } from 'rxjs';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({

@@ -11,6 +11,8 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { UnsavedGuard } from './changes-saved.guard';
+import { ValidationHelper } from './validation-helper.pipe';
+import { ValidationErrorsDirective } from './validationErrors.directive';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { UnsavedGuard } from './changes-saved.guard';
     RecipeItemComponent,
     PleaseSelectComponent,
     RecipeEditComponent,
+    ValidationHelper,
+    ValidationErrorsDirective
   ],
   imports: [
     RouterModule,
