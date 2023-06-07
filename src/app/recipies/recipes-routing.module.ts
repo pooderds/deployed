@@ -17,7 +17,7 @@ const routes: Routes = [
         children: [
     
           { path: '', component: PleaseSelectComponent },
-          { path: 'new', component: RecipeEditComponent},
+          { path: 'new', component: RecipeEditComponent, canDeactivate: [UnsavedGuard]},
           { path: ':id', component: RecipeDetailComponent, resolve: {recipes: RecipesResolverService} },
           { path: ':id/edit', component: RecipeEditComponent,
            resolve: {recipes: RecipesResolverService},

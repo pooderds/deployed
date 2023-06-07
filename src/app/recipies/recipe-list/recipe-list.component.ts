@@ -20,13 +20,14 @@ export class RecipeListComponent implements OnInit, OnDestroy{
               private route: ActivatedRoute) {}
   
   ngOnInit(): void {
-    this.recipes = this.recipeService.getRecipes();
     this.subscription = this.recipeService.recipesChanged
     .subscribe(
       (recipes: Recipe[]) => {
         this.recipes = recipes;
       }
     );
+
+    this.recipes = this.recipeService.getRecipes();
   }
 
   onNewRecipe() {

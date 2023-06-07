@@ -1,13 +1,14 @@
 <div class="row">
     <div class="col-xs-12">
-        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" >
+        <form [formGroup]="recipeForm" 
+        (ngSubmit)="onSubmit()"
+         >
             <div class="row">
                 <div class="col-xs-12">
                     <button 
                     type="submit" 
                     class="btn btn-success"
                     [disabled]="!recipeForm.valid"
-                    
                     >Save</button>
                     <button 
                     type="button"
@@ -25,7 +26,23 @@
                         type="text" 
                         id="name" 
                         class="form-control"
-                        formControlName="name">
+                        formControlName="name"
+                        
+                        >
+                        <ul class="text-danger list-unstyled mt-1">
+                            <li *validationErrors="recipeForm; control:'name'; let err">
+                            {{ err }}
+                        </li>
+                            </ul>
+                        <!-- <ul class="text-danger list-unstyled mt-1" *ngIf="!recipeForm.get('name').valid && recipeForm.get('name').touched">
+                            <li *ngFor="let err of recipeForm.get('name').errors | validationFormat:'name'">
+                            {{ err }}
+                            </li>
+                            </ul> -->
+                        <!-- <span 
+                        *ngIf="!recipeForm.get('name').valid && recipeForm.get('name').touched"
+                        class="help-block">Please enter a recipe name!
+                    </span>  -->
                     </div>
                 </div>
             </div>
@@ -58,6 +75,12 @@
                         rows="6"
                         formControlName="description">
                         </textarea>
+                        <ul class="text-danger list-unstyled mt-1">
+                            <li *validationErrors="recipeForm; control:'description'; let err">
+                            {{ err }}
+                        </li>
+                            </ul>
+                        
                     </div>
                 </div>
             </div>

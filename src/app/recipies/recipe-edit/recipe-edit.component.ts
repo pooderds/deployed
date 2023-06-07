@@ -3,8 +3,6 @@ import {
   FormArray,
   FormControl,
   FormGroup,
-  UntypedFormControl,
-  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -27,7 +25,9 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -74,6 +74,7 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     let recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
+      
       const recipe = this.recipeService.getRecipe(this.id);
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
@@ -86,19 +87,21 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
               amount: new FormControl(ingredient.amount, [
                 Validators.required,
                 Validators.pattern(/^[1-9]+[0-9]*$/),
-              ]),
+              ], ),
             })
           );
         }
       }
     }
 
-    this.recipeForm = new UntypedFormGroup({
-      name: new UntypedFormControl(recipeName, Validators.required),
-      imagePath: new UntypedFormControl(recipeImagePath, Validators.required),
-      description: new UntypedFormControl(
-        recipeDescription,
-        Validators.required
+    this.recipeForm = new FormGroup({
+      name: new FormControl(recipeName, Validators.required, ),
+      imagePath: new FormControl(recipeImagePath, Validators.required),
+      description: new FormControl(
+        recipeDescription, {
+        validators: [Validators.required, Validators.minLength(3)],
+        //  updateOn: 'blur' 
+        }
       ),
       ingredients: recipeIngredients,
     });
@@ -108,9 +111,6 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
 
-  // unsavedChanges(): boolean {
-  //   return this.recipeForm.dirty;
-  // }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean{
    
