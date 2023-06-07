@@ -11,22 +11,6 @@ export class ValidationHelper {
         }
         return this.formatMessages(source as ValidationErrors, name);
       }
-    // formatMessages(errors: ValidationErrors | null, name: string): string[] {
-    //     let messages: string[] = [];
-    //     for (let err in errors){
-    //         if( err == "required"){
-    //             messages.push(`You must enter the ${name}`)
-    //         }
-    //         if (err == "pattern"){
-    //             messages.push(`The ${name} contains illegal characters`);
-    //         }
-    //         if(err == 'minlength'){
-    //             messages.push(`The ${name} must be at least 3 characters long `)
-    //         }
-           
-    //     }
-    //     return messages;
-    // }
 
     formatMessages(errors: ValidationErrors | null, name: string): string[] {
         let messages: string[] = [];
