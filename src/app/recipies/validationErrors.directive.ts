@@ -22,12 +22,12 @@ export class ValidationErrorsDirective {
       let control = this.formGroup?.get(this.name);
       if (control) {
         
-        control.statusChanges.subscribe((s) => {
-            console.log(s);if(s === 'INVALID'){
+        control.statusChanges.subscribe(() => {
+              
           if (this.container.length > 0) {
             this.container.clear();
           }
-          if (control && control.touched &&control.dirty && control.invalid && control.errors) {
+          if (control &&control.dirty && control.invalid && control.errors) {
             formatter
               .formatMessages(control.errors, this.label ?? this.name)
               .forEach((err) => {
@@ -35,7 +35,7 @@ export class ValidationErrorsDirective {
                   $implicit: err,
                 });
               });
-          }}
+          }
         });
       }
     }

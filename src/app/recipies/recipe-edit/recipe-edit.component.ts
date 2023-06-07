@@ -95,12 +95,12 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     }
 
     this.recipeForm = new FormGroup({
-      name: new FormControl(recipeName, Validators.required, ),
+      name: new FormControl(recipeName, [Validators.required, Validators.minLength(3)], ),
       imagePath: new FormControl(recipeImagePath, Validators.required),
       description: new FormControl(
         recipeDescription, {
         validators: [Validators.required, Validators.minLength(3)],
-        //  updateOn: 'blur' 
+         updateOn: 'blur' 
         }
       ),
       ingredients: recipeIngredients,

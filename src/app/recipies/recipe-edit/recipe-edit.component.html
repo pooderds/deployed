@@ -27,7 +27,6 @@
                         id="name" 
                         class="form-control"
                         formControlName="name"
-                        
                         >
                         <ul class="text-danger list-unstyled mt-1">
                             <li *validationErrors="recipeForm; control:'name'; let err">
@@ -56,6 +55,11 @@
                         class="form-control"
                         formControlName="imagePath"
                         #imagePath>
+                        <ul class="text-danger list-unstyled mt-1">
+                            <li *validationErrors="recipeForm; control:'imagePath'; let err">
+                            {{ err }}
+                        </li>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -120,6 +124,7 @@
                             style="margin-bottom: 20px;">Add Ingredient</button>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </form>
