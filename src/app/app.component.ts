@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth/auth.service';
 import { LoggingService } from './logging.service';
 
@@ -8,11 +8,9 @@ import { LoggingService } from './logging.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private authService: AuthService,
-              private LoggingService:LoggingService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.autoLogin();
-    
   }
 }
