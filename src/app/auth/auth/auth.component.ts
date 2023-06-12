@@ -19,15 +19,13 @@ export class AuthComponent implements OnDestroy{
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost: PlaceholderDirective;
 
-  private closeSub: Subscription;
+  private closeSub: Subscription; 
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {}
-
-
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;

@@ -11,7 +11,8 @@ import { take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGard {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, 
+              private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,8 +24,8 @@ export class AuthGard {
         const isAuth = !!user;
         if (isAuth) {
           return true;
-        }
-        return this.router.createUrlTree(['/auth']);
+        } 
+        return this.router.createUrlTree(['/welcome']);
       })
     );
   }

@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-recipies',
-  templateUrl: './recipies.component.html',
-  styleUrls: ['./recipies.component.css']
+  templateUrl: './recipies.component.html'
 })
 export class RecipiesComponent  implements OnInit{
 
