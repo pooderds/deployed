@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanDeactivate } from "@angular/router";
-import { Observable, Subject } from "rxjs";
-import { RecipeEditComponent } from "./recipe-edit/recipe-edit.component";
+import { Observable } from "rxjs";
 
 export interface CanComponentDeactivate {
     canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
