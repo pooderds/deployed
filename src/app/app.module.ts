@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     HttpClientModule,
     SharedModule,
     CoreModule,
-    WelcomeComponent
+    WelcomeComponent,
+    BrowserAnimationsModule
   ],
  
   bootstrap: [AppComponent],
