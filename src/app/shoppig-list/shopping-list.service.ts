@@ -41,14 +41,18 @@ export class ShoppingListService {
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    // const data = ingredients.filter((item) => {
-    //   return !this.ingredients.some((item_1) => {
-    //     return item.name === item_1.name;
-    //   });
-    // });
+    const data = ingredients.filter((item) => {
+      return !this.ingredients.some((item_1) => {
+        return item.name === item_1.name;
+      });
+    });
+    const updated = this.update(ingredients, this.ingredients);
+    
+    const data1 = JSON.parse(JSON.stringify(data));
 
-  
-    this.ingredients.push(...ingredients);
+    const updated1 = JSON.parse(JSON.stringify(updated));
+   
+    this.ingredients = [...updated1, ...data1];
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
@@ -62,49 +66,26 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  // private update(a: Ingredient[], b: Ingredient[]) {
-  //   let newarr = [];
-  //   for (let obj of b) {
-  //     let found = a.find((item) => item.name == obj.name);
-  //     if (found) {
-  //       newarr.push(found);
-  //       found.amount += obj.amount;
-  //     } else {
-  //       newarr.push(obj);
-  //     }
-  //   }
-  //   return newarr;
-  // }
+  private update(a: Ingredient[], b: Ingredient[]): Ingredient[] {
+    let newarr: Ingredient[] = [];
+    for (let obj of a) {
+      let foundInB = b.filter((item) => item.name == obj.name);
+      newarr.push(...foundInB);
+    }
+    for (let obj of b) {
+      let foundInA = a.filter((item) => item.name == obj.name);
+      newarr.push(...foundInA);
+    }
 
-  private update(a: Ingredient[]): Ingredient[]{
-    const result = a.reduce((acc, obj) => {
-      const key = obj.name;
-      if (!acc[key]) {
-        acc[key] = obj;
+    let filtered = {};
+    for (const ingr of newarr) {
+      if (ingr.name in filtered) {
+        filtered[ingr.name].amount += ingr.amount;
       } else {
-        acc[key].amount += obj.amount
-        // acc[key] = Object.assign(acc[key], obj);
-      }
-      return acc;
-    }, {});
-   return Object.values(result);
-    
-  }
-
-
-  private filterAndAddIngredients(ingredients: Ingredient[]): Ingredient[] {
-    const filteredIngredients = {};
-  
-    for (const ingredient of ingredients) {
-      if (ingredient.name in filteredIngredients) {
-        filteredIngredients[ingredient.name].amount += ingredient.amount;
-      } else {
-        filteredIngredients[ingredient.name] = ingredient;
+        filtered[ingr.name] = ingr;
       }
     }
-  
-    return Object.values(filteredIngredients);
+    let filteredArray: Ingredient[] = Object.values(filtered);
+    return filteredArray;
   }
-
-
 }
