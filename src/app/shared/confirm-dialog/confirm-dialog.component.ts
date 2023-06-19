@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -12,26 +6,20 @@ import {
   styleUrls: ['./confirm-dialog.component.css'],
 })
 export class ConfirmDialogComponent implements OnInit {
-  
   constructor() {}
 
   @Input() title: string = '';
   @Input() body: string = '';
-  @Output() closeMeEvent = new EventEmitter();
-  @Output() confirmEvent = new EventEmitter();
-  ngOnInit(): void {
-    console.log('Modal init');
-  }
+  @Output() closeMeEvent = new EventEmitter<boolean>();
+  @Output() confirmEvent = new EventEmitter<boolean>();
+  ngOnInit(): void {}
 
   closeMe() {
-    this.closeMeEvent.emit();
+    this.closeMeEvent.emit(false);
   }
   confirm() {
-    this.confirmEvent.emit();
-  } 
+    this.confirmEvent.emit(true);
+  }
 
- ngOnDestroy(): void {
-    console.log(' Modal destroyed');
-  } 
-
+  ngOnDestroy(): void {}
 }

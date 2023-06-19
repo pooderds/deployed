@@ -8,7 +8,7 @@
             *ngFor=" let ingridient of ingredients; let i = index"
            (click)="onEditItem(i)"
             >
-                {{ingridient.name}} ({{ ingridient.amount}})
+                {{ingridient.name | titlecase }} ({{ ingridient.amount}})
              </a>
         </ul>
     </div>

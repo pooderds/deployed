@@ -5,7 +5,7 @@ import { AlertComponent } from "./alert/alert.component";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { PlaceholderDirective } from "./placeholder.directive";
 import { DropDownDirective } from "./drop-down.directive";
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { UnsavedGuard } from "./guards/changes-saved/changes-saved.guard";
 
 @NgModule({
     declarations: [
@@ -23,6 +23,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
         PlaceholderDirective,
         DropDownDirective,
         CommonModule
-    ]
+    ],
+    providers: [UnsavedGuard]
 })
 export class SharedModule {}

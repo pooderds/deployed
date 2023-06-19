@@ -1,16 +1,24 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { Ingredient } from 'src/app/shared/ingridient.model';
 import { ShoppingListService } from '../shopping-list.service';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shoping-edit',
   templateUrl: './shoping-edit.component.html',
-  styleUrls: ['./shoping-edit.component.css']
+  styleUrls: ['./shoping-edit.component.css'],
 })
-export class ShopingEditComponent implements OnInit, OnDestroy {
+export class ShopingEditComponent
+  implements OnInit, OnDestroy
+{
   @ViewChild('f', { static: false }) slForm: NgForm;
 
   subscription: Subscription;
@@ -18,23 +26,21 @@ export class ShopingEditComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Ingredient;
 
-  constructor(private slService: ShoppingListService) { }
+  constructor(private slService: ShoppingListService,) {}
 
   ngOnInit(): void {
-    this.subscription = this.slService.startedEditing
-      .subscribe(
-        (index: number) => {
-          this.editedItemIndex = index;
-          this.editMode = true;
-          this.editedItem = this.slService.getIngredient(index);
-          this.slForm.setValue({
-            name: this.editedItem.name,
-            amount: this.editedItem.amount
-          })
-        }
-      );
+    this.subscription = this.slService.startedEditing.subscribe(
+      (index: number) => {
+        this.editedItemIndex = index;
+        this.editMode = true;
+        this.editedItem = this.slService.getIngredient(index);
+        this.slForm.setValue({
+          name: this.editedItem.name,
+          amount: this.editedItem.amount,
+        });
+      }
+    );
   }
-
 
   onSubmit(form: NgForm) {
     const value = form.value;
@@ -54,11 +60,12 @@ export class ShopingEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.slService.deleteIngredient(this.editedItemIndex)
+    this.slService.deleteIngredient(this.editedItemIndex);
     this.onClear();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }

@@ -1,9 +1,21 @@
-<!-- <p>confirm-dialog works!</p>
-<div class="backdrop" ></div>
+
+<div class="backdrop" (click)="closeMe()"></div>
 <div class="alert-box">
+    <p>{{title}}</p>
     <p>Do you want to discard the changes?</p>
     <div class="alert-box-actions">
-        <button class="btn btn-primary" (click)="onStay()">No</button>
-        <button class="btn btn-primary" (click)="onLeave()">Yes</button>
+        <button class="btn btn-primary" (click)="closeMe()">No</button>
+        <button class="btn btn-primary" (click)="confirm()">Yes</button>
     </div>
+</div>
+
+<!-- <div class="modal-container">
+
+    <h1 class="title">{{ title }}</h1>
+    <p class="body">{{ body }}</p>
+    <div class="btn-container">
+        <button (click)="closeMe()">close</button>
+        <button (click)="confirm()">Confirm</button>
+    </div>
+
 </div> -->

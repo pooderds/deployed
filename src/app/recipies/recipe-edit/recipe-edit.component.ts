@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
-import { CanComponentDeactivate } from '../changes-saved.guard';
-import { Observable } from 'rxjs';
+import { Observable, mergeMap, of } from 'rxjs';
 import { ModalService } from 'src/app/shared/confirm-dialog/confirm.servicee';
+import { CanComponentDeactivate } from 'src/app/shared/guards/changes-saved/safe-data.interface';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -21,14 +16,14 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
   editMode = false;
   recipeForm: FormGroup;
   changesSaved = false;
+  @ViewChild('modal', { read: ViewContainerRef }) entry!: ViewContainerRef;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private router: Router
-  ) {
-    
-  }
+    private router: Router,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -75,7 +70,6 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     let recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
-      
       const recipe = this.recipeService.getRecipe(this.id);
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
@@ -88,7 +82,7 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
               amount: new FormControl(ingredient.amount, [
                 Validators.required,
                 Validators.pattern(/^[1-9]+[0-9]*$/),
-              ], ),
+              ]),
             })
           );
         }
@@ -96,14 +90,15 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     }
 
     this.recipeForm = new FormGroup({
-      name: new FormControl(recipeName, [Validators.required, Validators.minLength(3)], ),
+      name: new FormControl(recipeName, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
       imagePath: new FormControl(recipeImagePath, Validators.required),
-      description: new FormControl(
-        recipeDescription, {
+      description: new FormControl(recipeDescription, {
         validators: [Validators.required, Validators.minLength(3)],
-         updateOn: 'blur' 
-        }
-      ),
+        updateOn: 'blur',
+      }),
       ingredients: recipeIngredients,
     });
   }
@@ -112,16 +107,15 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
 
-
-  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean{
-   
-    if( this.recipeForm.dirty && !this.changesSaved) {
-      return confirm ('Do you want to discard the changes?');
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.recipeForm.dirty && !this.changesSaved) {
+      return this.modalService.openModal(this.entry).pipe(
+        mergeMap((action) => {
+          return of(action);
+        })
+      );
     } else {
       return true;
     }
   }
-
- 
 }
- 

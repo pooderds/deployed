@@ -10,7 +10,6 @@ import { PleaseSelectComponent } from './recipe-start/please-select.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { UnsavedGuard } from './changes-saved.guard';
 import { ValidationHelper } from './validation-helper.pipe';
 import { ValidationErrorsDirective } from './validationErrors.directive';
 
@@ -23,14 +22,13 @@ import { ValidationErrorsDirective } from './validationErrors.directive';
     PleaseSelectComponent,
     RecipeEditComponent,
     ValidationHelper,
-    ValidationErrorsDirective
+    ValidationErrorsDirective,
   ],
   imports: [
     RouterModule,
     ReactiveFormsModule,
     RecipesRoutingModule,
-    SharedModule
-  ],
-  providers: [UnsavedGuard]
+    SharedModule,
+  ]
 })
 export class RecipesModule {}

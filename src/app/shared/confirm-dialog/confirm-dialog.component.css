@@ -22,3 +22,7 @@
 .alert-box-actions_{
     text-align: right;
 }
+.btn {
+    width: 80px;
+    margin-left: 10px;
+}
