@@ -41,18 +41,19 @@ export class ShoppingListService {
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    const data = ingredients.filter((item) => {
+    const ingridientsNotIntheList = ingredients.filter((item) => {
       return !this.ingredients.some((item_1) => {
         return item.name === item_1.name;
       });
     });
-    const updated = this.update(ingredients, this.ingredients);
     
-    const data1 = JSON.parse(JSON.stringify(data));
+    const ingredientsIntheList = this.update(ingredients, this.ingredients);
+    
+    const ingridientsNotIntheListParsed = JSON.parse(JSON.stringify(ingridientsNotIntheList));
 
-    const updated1 = JSON.parse(JSON.stringify(updated));
+    const ingredientsIntheListParsed = JSON.parse(JSON.stringify(ingredientsIntheList));
    
-    this.ingredients = [...updated1, ...data1];
+    this.ingredients = [...ingredientsIntheListParsed, ...ingridientsNotIntheListParsed];
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
@@ -66,15 +67,15 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  private update(a: Ingredient[], b: Ingredient[]): Ingredient[] {
+  private update(newAr: Ingredient[], oldAr: Ingredient[]): Ingredient[] {
     let newarr: Ingredient[] = [];
-    for (let obj of a) {
-      let foundInB = b.filter((item) => item.name == obj.name);
-      newarr.push(...foundInB);
+    for (let obj of newAr) {
+      let foundInOld = oldAr.filter((item) => item.name == obj.name);
+      newarr.push(...foundInOld);
     }
-    for (let obj of b) {
-      let foundInA = a.filter((item) => item.name == obj.name);
-      newarr.push(...foundInA);
+    for (let obj of oldAr) {
+      let foundInNew = newAr.filter((item) => item.name == obj.name);
+      newarr.push(...foundInNew);
     }
 
     let filtered = {};
