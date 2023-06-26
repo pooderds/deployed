@@ -9,9 +9,9 @@ import { RecipiesComponent } from './recipies.component';
 import { PleaseSelectComponent } from './recipe-start/please-select.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipesRoutingModule } from './recipes-routing.module';
-import { SharedModule } from '../shared/shared.module';
 import { ValidationHelper } from './validation-helper.pipe';
 import { ValidationErrorsDirective } from './validationErrors.directive';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
