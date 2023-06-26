@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: 'welcome',
     loadComponent: ()=> import('./welcome/welcome.component')
-    .then( m => m.WelcomeComponent)
+    .then( c => c.WelcomeComponent)
   },
   {
     path: '**', redirectTo: '/recipes'
