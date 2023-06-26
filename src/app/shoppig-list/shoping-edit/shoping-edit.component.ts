@@ -13,8 +13,7 @@ import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shoping-edit',
-  templateUrl: './shoping-edit.component.html',
-  styleUrls: ['./shoping-edit.component.css'],
+  templateUrl: './shoping-edit.component.html'
 })
 export class ShopingEditComponent
   implements OnInit, OnDestroy

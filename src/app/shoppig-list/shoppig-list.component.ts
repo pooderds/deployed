@@ -5,8 +5,7 @@ import { ShoppingListService } from './shopping-list.service';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-shoppig-list',
-  templateUrl: './shoppig-list.component.html',
-  styleUrls: ['./shoppig-list.component.css'],
+  templateUrl: './shoppig-list.component.html'
   
 })
 export class ShoppigListComponent implements OnInit, OnDestroy {

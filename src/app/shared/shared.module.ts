@@ -6,13 +6,15 @@ import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.compo
 import { PlaceholderDirective } from "./placeholder.directive";
 import { DropDownDirective } from "./drop-down.directive";
 import { UnsavedGuard } from "./guards/changes-saved/changes-saved.guard";
+import { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.component";
 
 @NgModule({
     declarations: [
         AlertComponent,
         LoadingSpinnerComponent,
         PlaceholderDirective,
-        DropDownDirective
+        DropDownDirective,
+        ConfirmDialogComponent
     ],
     imports: [
         CommonModule
@@ -22,7 +24,8 @@ import { UnsavedGuard } from "./guards/changes-saved/changes-saved.guard";
         LoadingSpinnerComponent,
         PlaceholderDirective,
         DropDownDirective,
-        CommonModule
+        CommonModule,
+        ConfirmDialogComponent
     ],
     providers: [UnsavedGuard]
 })
