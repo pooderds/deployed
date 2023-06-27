@@ -16,6 +16,11 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
   editMode = false;
   recipeForm: FormGroup;
   changesSaved = false;
+
+  get controls() {
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;
+  }
+
   @ViewChild('modal', { read: ViewContainerRef }) entry!: ViewContainerRef;
 
   constructor(
@@ -103,10 +108,7 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     });
   }
 
-  get controls() {
-    return (<FormArray>this.recipeForm.get('ingredients')).controls;
-  }
-
+ 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (this.recipeForm.dirty && !this.changesSaved) {
       return this.modalService.openModal(this.entry).pipe(
